@@ -1,35 +1,37 @@
-
----
-
-## **install.sh**
-```bash
 #!/bin/bash
+set -e
 
-GREEN='\033[0;32m'
-NC='\033[0m'
+echo "=== 🛠 INSTALLAZIONE DIPENDENZE ==="
 
-echo -e "${GREEN}==> Avvio installazione dipendenze per Dashboard Servizi...${NC}"
-
-# Aggiornamento pacchetti
-sudo apt update -y
-
-# Installazione pacchetti di sistema
-echo -e "${GREEN}==> Installo pacchetti di sistema...${NC}"
-sudo apt install -y curl python3 python3-pip procps
-
-# Creazione requirements.txt (se non esiste già)
-if [ ! -f requirements.txt ]; then
-  echo -e "${GREEN}==> Creo requirements.txt...${NC}"
-  cat <<EOF > requirements.txt
-Flask
-EOF
+# Installa curl se non presente
+if ! command -v curl &> /dev/null; then
+    echo "⚠️ curl non trovato. Installazione in corso..."
+    sudo apt-get update
+    sudo apt-get install -y curl
+else
+    echo "✅ curl già installato"
 fi
 
-# Installazione pacchetti Python
-echo -e "${GREEN}==> Installo dipendenze Python...${NC}"
-pip3 install --upgrade pip
-pip3 install -r requirements.txt
+# Controlla Python 3
+if command -v python3 &> /dev/null; then
+    echo "✅ Python3 già installato"
+else
+    echo "⚠️ Python3 non trovato. Installazione in corso..."
+    sudo apt update
+    sudo apt install -y python3
+fi
 
-echo -e "${GREEN}✅ Installazione completata!${NC}"
-echo "Puoi avviare l'app con:"
-echo -e "${GREEN}python3 app.py${NC}"
+# Controlla pip
+if command -v pip3 &> /dev/null; then
+    echo "✅ pip3 già installato"
+else
+    echo "⚠️ pip3 non trovato. Installazione in corso..."
+    sudo apt install -y python3-pip
+fi
+
+# Installa dipendenze Python
+echo "📦 Installazione dipendenze da requirements.txt"
+pip install --break-system-packages --upgrade pip
+pip install --break-system-packages -r requirements.txt
+
+echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
