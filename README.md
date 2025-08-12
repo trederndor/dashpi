@@ -34,7 +34,6 @@ git clone https://github.com/trederndor/dashpi.git ~/dashpi
 cd ~/dashpi
 chmod +x ./install.sh
 sudo ./install.sh
-speedtest
 python3 dashpi.py
 ```
 
