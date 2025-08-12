@@ -35,16 +35,7 @@ else
     echo "⚠️ pip3 non trovato. Installazione in corso..."
     sudo apt install -y python3-pip
 fi
-crontab -l > /tmp/current_cron 2>/dev/null || true
-grep -Fq "# Avvia dashpi.py all'avvio del server" /tmp/current_cron && echo "Trovato" || echo "Non trovato"
 
-# Se non trovato:
-{
-  cat /tmp/current_cron
-  echo ""
-  echo "# Avvia dashpi.py all'avvio del server"
-  echo "# @reboot python3 /home/mosca/dashpi/dashpi.py"
-} | crontab -
 
 # Installa dipendenze Python
 echo "📦 Installazione dipendenze da requirements.txt"
