@@ -53,4 +53,14 @@ if [ -f "static.zip" ]; then
 else
     echo "⚠️ static.zip non trovato, niente da estrarre"
 fi
+# Aggiunge al crontab una riga commentata per avviare lo script all’avvio (se non già presente)
+CRON_MARK="# Avvia dashpi.py all'avvio del server"
+CRON_CMD="@reboot python3 /home/mosca/dashpi/dashpi.py"
+
+# Controlla se la riga commentata esiste già, altrimenti la aggiunge
+(crontab -l 2>/dev/null | grep -qF "$CRON_MARK") || (
+    (crontab -l 2>/dev/null; echo ""; echo "$CRON_MARK"; echo "# $CRON_CMD") | crontab -
+    echo "📝 Aggiunta riga commentata al crontab per l’avvio automatico dello script"
+)
+
 echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
