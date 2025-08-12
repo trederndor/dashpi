@@ -11,6 +11,13 @@ if ! command -v curl &> /dev/null; then
 else
     echo "✅ curl già installato"
 fi
+# Installa unzip se non presente
+if ! command -v unzip &> /dev/null; then
+    echo "⚠️ unzip non trovato. Installazione in corso..."
+    sudo apt-get install -y unzip
+else
+    echo "✅ unzip già installato"
+fi
 
 # Controlla Python 3
 if command -v python3 &> /dev/null; then
