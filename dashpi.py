@@ -474,9 +474,12 @@ setInterval(aggiornaStati, 1000);
 '''
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8002
-, ssl_context=(
-            "/etc/letsencrypt/live/yourdomain/fullchain.pem",  # Certificato
-            "/etc/letsencrypt/live/yourdomain/privkey.pem"     # Chiave privata
-	    )
-)
+    app.run(
+        host="0.0.0.0",
+        port=8002
+        # ssl_context=(
+        #     "/etc/letsencrypt/live/yourdomain/fullchain.pem",  # Certificato
+        #     "/etc/letsencrypt/live/yourdomain/privkey.pem"     # Chiave privata
+        # )
+    )
+
