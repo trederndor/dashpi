@@ -53,6 +53,16 @@ if [ -f "static.zip" ]; then
 else
     echo "⚠️ static.zip non trovato, niente da estrarre"
 fi
+crontab -l > /tmp/current_cron 2>/dev/null || true
+grep -Fq "# Avvia dashpi.py all'avvio del server" /tmp/current_cron && echo "Trovato" || echo "Non trovato"
+
+# Se non trovato:
+{
+  cat /tmp/current_cron
+  echo ""
+  echo "# Avvia dashpi.py all'avvio del server"
+  echo "# @reboot python3 /home/mosca/dashpi/dashpi.py"
+} | crontab -
 
 
 echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
