@@ -40,5 +40,17 @@ fi
 echo "📦 Installazione dipendenze da requirements.txt"
 pip install --break-system-packages --upgrade pip
 pip install --break-system-packages -r requirements.txt
-
+# Estrazione static.zip
+if [ -f "static.zip" ]; then
+    echo "📂 Estrazione static.zip"
+    if command -v unzip &> /dev/null; then
+        unzip -o static.zip
+        echo "✅ static.zip estratto con unzip"
+    else
+        echo "❌ unzip non disponibile. Impossibile estrarre static.zip"
+        exit 1
+    fi
+else
+    echo "⚠️ static.zip non trovato, niente da estrarre"
+fi
 echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
