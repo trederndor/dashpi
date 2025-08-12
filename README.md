@@ -9,7 +9,7 @@ Mostra quali servizi sono attivi sul sistema, aggiornandosi automaticamente ogni
 - **Verifica automatica** dello stato dei processi tramite `pgrep` o `systemctl`.
 - **Aggiornamento in tempo reale** tramite JavaScript e fetch API.
 - **Interfaccia responsive** in tema scuro.
-- **Supporto SSL** (Let's Encrypt).
+- **Supporto SSL** (Let's Encrypt). (optional, recomanded only if exposed on the web)
 
 ## **Requisiti di sistema**
 - Linux con `systemd`
