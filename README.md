@@ -22,10 +22,20 @@ Mostra quali servizi sono attivi sul sistema, aggiornandosi automaticamente ogni
   - `systemctl` (già presente nella maggior parte delle distro)
   - `flask`
 
-## **Installazione**
-Clona il repository:
+## Quick Installation
+
 ```bash
-git clone https://github.com/TUO-UTENTE/dashboard-servizi.git
-cd dashboard-servizi
+curl -sSL https://raw.githubusercontent.com/trederndor/dashpi/refs/heads/main/fastinstall.sh | bash
+```
+## Manual Installation
+
+```bash
+git clone https://github.com/trederndor/dashpi.git ~/dashpi
+cd ~/dashpi
+chmod +x ./install.sh
+sudo ./install.sh
+speedtest
+python3 dashpi.py
+```
 
 mini service status dashboard with links
