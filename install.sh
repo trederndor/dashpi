@@ -56,4 +56,4 @@ else
 fi
 
 
-echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
+echo "✅ Tutto installato. Puoi ora avviare lo script Python! if u want to start it automatically add this in the crontab: @reboot python3 /home/<USER>/dashpi/dashpi.py"
