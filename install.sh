@@ -57,10 +57,28 @@ fi
 CRON_MARK="# Avvia dashpi.py all'avvio del server"
 CRON_CMD="@reboot python3 /home/mosca/dashpi/dashpi.py"
 
-# Controlla se la riga commentata esiste già, altrimenti la aggiunge
-(crontab -l 2>/dev/null | grep -qF "$CRON_MARK") || (
-    (crontab -l 2>/dev/null; echo ""; echo "$CRON_MARK"; echo "# $CRON_CMD") | crontab -
-    echo "📝 Aggiunta riga commentata al crontab per l’avvio automatico dello script"
-)
+# Aggiunge al crontab dell'utente corrente una riga commentata per avviare lo script all’avvio (se non già presente)
+CRON_MARK="# Avvia dashpi.py all'avvio del server"
+CRON_CMD="@reboot python3 /home/mosca/dashpi/dashpi.py"
+
+# Ottiene il crontab esistente o crea uno vuoto se non esiste
+crontab -l 2>/dev/null > /tmp/current_cron || true
+
+# Controlla se la riga commentata esiste già
+if ! grep -Fq "$CRON_MARK" /tmp/current_cron; then
+    {
+      cat /tmp/current_cron
+      echo ""
+      echo "$CRON_MARK"
+      echo "# $CRON_CMD"
+    } | crontab -
+    echo "📝 Righe commentate per l’avvio automatico aggiunte al crontab dell’utente corrente."
+else
+    echo "ℹ️ Righe commentate già presenti nel crontab dell’utente corrente."
+fi
+
+# Pulisce
+rm /tmp/current_cron
+
 
 echo "✅ Tutto installato. Puoi ora avviare lo script Python!"
